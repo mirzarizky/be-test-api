@@ -21,3 +21,7 @@ Route::prefix('auth')->group(function () {
         Route::get('user', 'AuthController@user');
     });
 });
+
+Route::middleware(['auth:sanctum', 'scope:app'])->group(function () {
+    Route::resource('product', 'ProductController');
+});
