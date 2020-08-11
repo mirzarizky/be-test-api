@@ -12,5 +12,5 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return response()->json('it\'s okay. everything will be just fine.');
 });
