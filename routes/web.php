@@ -14,3 +14,9 @@
 Route::get('/', function () {
     return response()->json('it\'s okay. everything will be just fine.');
 });
+
+Route::fallback(function () {
+    return response()->json([
+        'status_message' => 'not found'
+    ]);
+});

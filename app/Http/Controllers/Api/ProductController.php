@@ -40,6 +40,7 @@ class ProductController extends Controller
         return response()->json([
             'status_code' => 200,
             'status_message' => 'Success',
+            'description' => '',
             'offset' => $offset,
             'limit' => $limit,
             'query_url' => $request->fullUrlWithQuery($request->query()),
@@ -110,7 +111,12 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return response()->json([
+            'status_code' => 200,
+            'status_message' => 'Success',
+            'description' => '',
+            'payload' => $product
+        ]);
     }
 
     /**
@@ -144,6 +150,12 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+
+        return response()->json([
+            'status_code' => 200,
+            'status_message' => 'Success',
+            'description' => ''
+        ]);
     }
 }

@@ -23,5 +23,11 @@ Route::prefix('auth')->group(function () {
 });
 
 Route::middleware(['auth:sanctum', 'scope:app'])->group(function () {
-    Route::resource('product', 'ProductController');
+    Route::resource('product', 'ProductController')->except(['create', 'edit']);
 });
+
+Route::fallback(function () {
+    return response()->json([
+        'status_message' => 'not found'
+    ]);
+})->name('api.fallback.404');
