@@ -29,5 +29,5 @@ Route::middleware(['auth:sanctum', 'scope:app'])->group(function () {
 Route::fallback(function () {
     return response()->json([
         'status_message' => 'not found'
-    ]);
+    ], 404);
 })->name('api.fallback.404');

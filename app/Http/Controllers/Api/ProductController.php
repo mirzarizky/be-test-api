@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Auth;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -83,16 +84,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -100,7 +91,23 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'product_name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'stock' => 'required|numeric',
+            'imageurl' => 'required|url',
+        ]);
+
+        $form_data = Arr::add($request->only(['product_name', 'price', 'stock', 'imageurl']), 'created_by', Auth::id());
+
+        $product = Product::create($form_data);
+
+        return response()->json([
+            'status_code' => 200,
+            'status_message' => 'Success',
+            'description' => '',
+            'payload' => ['product_id' => $product->product_id]
+        ]);
     }
 
     /**
@@ -120,17 +127,6 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -139,7 +135,22 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'product_name' => 'required|string|max:255',
+            'price' => 'required|numeric',
+            'stock' => 'required|numeric',
+            'imageurl' => 'required|url',
+        ]);
+
+        $form_data = Arr::add($request->only(['product_name', 'price', 'stock', 'imageurl']), 'updated_by', Auth::id());
+
+        $product->update($form_data);
+
+        return response()->json([
+            'status_code' => 200,
+            'status_message' => 'Success',
+            'description' => '',
+        ]);
     }
 
     /**

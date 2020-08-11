@@ -15,21 +15,6 @@ class Product extends Model
         'product_name', 'price', 'stock', 'imageurl', 'created_by', 'updated_by'
     ];
 
-    public function create()
-    {
-        $this->created_by = Auth::id();
-
-        return parent::create();
-    }
-
-
-    // public function update()
-    // {
-    //     $this->updated_by = Auth::id();
-
-    //     return parent::update();
-    // }
-
     protected $casts = [
         'created_at' => 'datetime:Y-m-d\TH:i:sO',
         'updated_at' => 'datetime:Y-m-d\TH:i:sO',
