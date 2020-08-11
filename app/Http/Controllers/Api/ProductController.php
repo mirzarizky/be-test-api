@@ -18,14 +18,57 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $perPage = $request->input('per_page') ?? 30;
-        $results = QueryBuilder::for(Product::class)
-        ->allowedFilters([
-            AllowedFilter::partial('name', 'product_name')->default('')
-        ])
-        ->paginate($perPage);
+        $perPage = $request->input('per_page') ?? 30; // default 30
+        $limit = $request->input('limit');
+        $offset = $request->input('offset');
 
-        $pagination_info = [
+        $query = QueryBuilder::for(Product::class)
+        ->defaultSort('-product_id')
+        ->allowedSorts(['product_id', 'product_name', 'price', 'stock', 'created_at', 'updated_at'])
+        ->allowedFields(['product_id', 'product_name', 'price', 'stock', 'imageurl', 'created_by', 'updated_by', 'created_at', 'updated_at'])
+        ->allowedFilters([
+            // AllowedFilter::partial('name', 'product_name')->default('')
+            'product_name'
+        ]);
+
+        $query_limited_offseted = $this->getQueryLimitOffset($query, $limit, $offset);
+
+        $results = !empty($limit) ? $query_limited_offseted->get()  : $query->paginate($perPage);
+
+        $pagination_info = empty($limit) ? $this->getPagination($results) : null;
+
+        return response()->json([
+            'status_code' => 200,
+            'status_message' => 'Success',
+            'offset' => $offset,
+            'limit' => $limit,
+            'query_url' => $request->fullUrlWithQuery($request->query()),
+            'count' => count(!empty($limit) ? $results : $results->items()),
+            'payload' => !empty($limit) ? $results : $results->items(),
+            'pagination' => $pagination_info
+        ]);
+    }
+
+    private function getQueryLimitOffset($query, $limit, $offset)
+    {
+        if(!empty($limit) && !empty($offset)) {
+            return $query->take($limit)->skip($offset);
+        }
+        else {
+            if(!empty($limit)) {
+                $query->take($limit);
+            }
+            if(!empty($offset)) {
+                $query->skip($offset);
+            }
+
+            return $query;
+        }
+    }
+
+    private function getPagination($results)
+    {
+        return [
             'current_page' => $results->currentPage(),
             'from' => $results->firstItem(),
             'next_page' => ($results->lastPage() > $results->currentPage()) ? $results->currentPage() + 1 : null,
@@ -36,11 +79,6 @@ class ProductController extends Controller
             'first_page' => 1, // always 1 isnt it?
             'last_page' => $results->lastPage(),
         ];
-
-        return response()->json([
-            'payload' => $results->items(),
-            'pagination' => $pagination_info
-        ]);
     }
 
     /**

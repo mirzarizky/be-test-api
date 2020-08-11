@@ -12,7 +12,7 @@ class Product extends Model
     protected $primaryKey = 'product_id';
 
     protected $fillable = [
-        'name', 'price', 'stock', 'imageurl', 'created_by', 'updated_by'
+        'product_name', 'price', 'stock', 'imageurl', 'created_by', 'updated_by'
     ];
 
     public function create()
