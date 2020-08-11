@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
@@ -13,25 +14,29 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
+            'username' => 'required|string',
             'password' => 'required|string'
         ]);
 
-        $user = User::where('email', $request->email)->first();
-
-        if (! $user || ! Hash::check($request->password, $user->password)) {
+        if (! Auth::attempt($request->only(['username', 'password']))) {
             throw ValidationException::withMessages([
-                'email' => ['Incorrect email or password.'],
+                'username' => ['Username atau password salah.'],
                 ]);
         }
 
+        $user = Auth::user();
         $device_name = $request->device_name ?? 'web';
         $token_scopes = ['app'];
         $access_token = $user->createToken($device_name, $token_scopes)->plainTextToken;
 
         return response()->json([
-            'user' => $user,
-            'access_token' => $access_token
+            'status_code' => 200,
+            'status_message' => 'Success',
+            'payload' => [
+                'id_user' => $user->id,
+                'username' => $user->username,
+                'token' => $access_token
+            ]
         ]);
     }
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9e30b21c57ca193de0e76883bd648cda",
+    "content-hash": "a3e7904f8410429dcb0257fc199a0c58",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -3992,6 +3992,49 @@
             "time": "2018-12-13T10:34:14+00:00"
         },
         {
+            "name": "caouecs/laravel-lang",
+            "version": "5.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/caouecs/Laravel-lang.git",
+                "reference": "96d7868069de7823a680710cc09d51fed24a5dbd"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/caouecs/Laravel-lang/zipball/96d7868069de7823a680710cc09d51fed24a5dbd",
+                "reference": "96d7868069de7823a680710cc09d51fed24a5dbd",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*"
+            },
+            "suggest": {
+                "ablunier/laravel-lang-installer": "Command for easily add languages to a Laravel project",
+                "andrey-helldar/laravel-lang-publisher": "Easy installation and update of translation files for your project",
+                "arcanedev/laravel-lang": "Translations manager and checker for Laravel 5",
+                "overtrue/laravel-lang": "Command to add languages in your project"
+            },
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "caouecs",
+                    "email": "caouecs@caouecs.net"
+                }
+            ],
+            "description": "Languages for Laravel",
+            "keywords": [
+                "lang",
+                "languages",
+                "laravel",
+                "lpm"
+            ],
+            "time": "2020-03-17T15:25:41+00:00"
+        },
+        {
             "name": "composer/ca-bundle",
             "version": "1.2.7",
             "source": {
@@ -5389,6 +5432,55 @@
                 "symfony"
             ],
             "time": "2019-03-07T21:35:13+00:00"
+        },
+        {
+            "name": "ottaviano/faker-gravatar",
+            "version": "0.1.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ottaviano/faker-gravatar.git",
+                "reference": "a7e914b0ceb69ab33fd43e007c8e9c920d788e85"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ottaviano/faker-gravatar/zipball/a7e914b0ceb69ab33fd43e007c8e9c920d788e85",
+                "reference": "a7e914b0ceb69ab33fd43e007c8e9c920d788e85",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "ext-curl": "*",
+                "fzaninotto/faker": "^1.6",
+                "phpunit/phpunit": "^7.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Ottaviano\\Faker\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dimitri Gritsajuk",
+                    "email": "gritsajuk.dimitri@gmail.com"
+                }
+            ],
+            "description": "Faker Gravatar image provider",
+            "keywords": [
+                "avatar",
+                "data",
+                "faker",
+                "fixtures",
+                "gravatar",
+                "image"
+            ],
+            "time": "2019-10-06T21:26:13+00:00"
         },
         {
             "name": "phar-io/manifest",

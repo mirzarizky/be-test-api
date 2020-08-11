@@ -14,7 +14,7 @@ use Illuminate\Http\Request;
 */
 
 Route::prefix('auth')->group(function () {
-    Route::post('login', 'AuthController@login');
+    Route::post('/', 'AuthController@login');
 
     Route::middleware(['auth:sanctum', 'scope:app'])->group(function () {
         Route::post('logout', 'AuthController@logout');
