@@ -53,14 +53,13 @@ class ProductController extends Controller
 
     private function getQueryLimitOffset($query, $limit, $offset)
     {
-        if(!empty($limit) && !empty($offset)) {
+        if (!empty($limit) && !empty($offset)) {
             return $query->take($limit)->skip($offset);
-        }
-        else {
-            if(!empty($limit)) {
+        } else {
+            if (!empty($limit)) {
                 $query->take($limit);
             }
-            if(!empty($offset)) {
+            if (!empty($offset)) {
                 $query->skip($offset);
             }
 
@@ -103,7 +102,7 @@ class ProductController extends Controller
         $product = Product::create($form_data);
 
         return response()->json([
-            'status_code' => 200,
+            'status_code' => 201,
             'status_message' => 'Success',
             'description' => '',
             'payload' => ['product_id' => $product->product_id]
