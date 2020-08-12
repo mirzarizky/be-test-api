@@ -1,16 +1,20 @@
-# Laravel 6 Starter
+# BE Test
 
-A Laravel starter for better development experience ✌
+## Links
+- demo url
+  > [https://backendtes.herokuapp.com/api](https://backendtes.herokuapp.com/api) <br>
+  notes: <br>
+  username: user[1-10]
+  password: password
+- api docs
+  > [https://documenter.getpostman.com/view/3440175/T1LLGUXz?version=latest](https://documenter.getpostman.com/view/3440175/T1LLGUXz?version=latest)
+- laravel docs
+  > [https://laravel.com/docs](https://laravel.com/docs)
 
-## Some notable features of this include:
-- [Laravel UI](https://laravel.com/docs/6.x/frontend)
-- [Ide Helper](https://github.com/barryvdh/laravel-ide-helper)
-- [Debugbar](https://github.com/barryvdh/laravel-debugbar)
-
-### Installation
+## Installation
 1. Clone this repository
 2. Run `composer install`
-3. Generate ide helper: `php artisan ide-helper:generate`
-4. Run your `laravel/ui` preference (optional)
-5. Change to your remote repository url
+3. Setup your `.env` files
+4. Run `php artisan migrate`
+5. Run `php artisan db:seed --class=FakeSeeder` (optional)
 6. Happy coding! 👩‍💻👨‍💻💻
